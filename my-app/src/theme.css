@@ -1,0 +1,20 @@
+
+/* ===========================
+Dark mode
+============================== */
+
+.dark{
+  background-color: #232323;
+}
+
+.dark main{
+  color: white;
+
+}
+
+.dark .hide-when-mobile,
+.dark .footer footer{
+  background-color: #131212;
+}
+
+
