@@ -1,16 +1,18 @@
 import React from "react";
 import "./header.css";
-
-// import { Link } from "react-router-dom";
-// import { NavLink } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
 
-import {useContext } from "react";
+import { useContext } from "react";
 import ThemeContext from "../Context/ThemeContext";
-
-
+//firebase
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase/configuration";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
-  const {theme,changeTheme} = useContext(ThemeContext);
+  const [user, loading, error] = useAuthState(auth);
+  const { theme, changeTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
   return (
     <div className="header">
       <header className={`hide-when-mobile`}>
@@ -18,10 +20,12 @@ const Header = () => {
           <Link to="/">Courses 4 Arab</Link>
         </h1>
 
-        <div  onChange={()=>{
-            changeTheme( theme === "light"?"dark":"light")
-          }}>
-          <input type="checkbox" className="checkbox" id="checkbox"/>
+        <div
+          onChange={() => {
+            changeTheme(theme === "light" ? "dark" : "light");
+          }}
+        >
+          <input type="checkbox" className="checkbox" id="checkbox" />
           <label htmlFor="checkbox" className="label">
             <i className="fas fa-moon" />
             <i className="fas fa-sun" />
@@ -30,62 +34,56 @@ const Header = () => {
         </div>
 
         <ul className="flex">
-          <li className="main-list">
-            <NavLink className="main-link" to="/html">
-              HTML
-            </NavLink>
-            <ul className="sub-ul">
-              <li>
-                <a href="www">Full Course</a>
-              </li>
-              <li>
-                <a href="www">Crash Course</a>
-              </li>
-              <li>
-                <a href="www">learn in 1h</a>
-              </li>
-            </ul>
-          </li>
-          <li className="main-list">
-            <NavLink className="main-link" to="/css">
-              CSS
-            </NavLink>
-            <ul className="sub-ul">
-              <li>
-                <a href="www">Full Course</a>
-              </li>
-              <li>
-                <a href="www">CSS Examples</a>
-              </li>
-              <li className="mini-projects">
-                <a href="www">mini projects&nbsp; + </a>
-                <ul className="sub-sub-ul">
-                  <li>
-                    <a href="www">project 1</a>
-                  </li>
-                  <li>
-                    <a href="www">project 2</a>
-                  </li>
-                  <li>
-                    <a href="www">project 3</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li className="main-list">
-            <NavLink className="main-link" to="/javascript">
-              JavaScript
-            </NavLink>
-            <ul className="sub-ul sub-of-js">
-              <li>
-                <a href="www">coming soon🔥</a>
-              </li>
-            </ul>
-          </li>
+          {user && (
+            <li
+              className="main-list"
+              onClick={() => {
+                signOut(auth)
+                  .then(() => {
+                    console.log("sign out done ");
+                    navigate("/");
+                  })
+                  .catch((error) => {
+                    console.log("sign out eroore ");
+                  });
+              }}
+            >
+              <NavLink className="main-link">Sign-Out</NavLink>
+            </li>
+          )}
+          {user && (
+            <li className="main-list">
+              <NavLink className="main-link" to="/about">
+              About
+              </NavLink>
+      
+            </li>
+          )}
+
+          {!user && (
+            <li className="main-list">
+              <NavLink className="main-link" to="/signin">
+                Sign-In
+              </NavLink>
+            </li>
+          )}
+          {!user && (
+            <li className="main-list">
+              <NavLink className="main-link" to="/signup">
+                Sign-Up
+              </NavLink>
+            </li>
+          )}
+          {user && (
+            <li className="main-list">
+              <NavLink className="main-link" to="/Profile">
+              Profile
+              </NavLink>
+            </li>
+          )}
         </ul>
       </header>
-      <header
+      {/* <header
         className="show-when-mobile"
         style={{ backgroundColor: "#000ff5" }}
       >
@@ -155,7 +153,7 @@ const Header = () => {
             </ul>
           </div>
         </div>
-      </header>
+      </header> */}
     </div>
   );
 };

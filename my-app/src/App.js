@@ -1,14 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/home";
-import Html from "./pages/html";
-import Css from "./pages/css";
-import JavaScript from "./pages/javaScript";
+import About from "./pages/About";
+
+import Profile from "./pages/Profile";
 
 
 //level 2 for useContext
 import {useContext } from "react";
 import ThemeContext from "./Context/ThemeContext";
 import "./theme.css"
+
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,20 +19,24 @@ const router = createBrowserRouter([
     errorElement: <h1>sorry ! </h1>,
   },
   {
-    path: "/html",
-    element: <Html />,
+    path: "/about",
+    element: <About />,
   },
   {
-    path: "/css",
-    element: <Css />,
+    path: "/signin",
+    element: <Signin />,
   },
   {
-    path: "/javascript",
-    element: <JavaScript />,
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/Profile",
+    element: <Profile />,
   },
 ]);
 function App() {
-  const {theme} = useContext(ThemeContext);
+  let {theme} = useContext(ThemeContext);
   return (
   <div className={`${theme}`}>
     <RouterProvider router={router} />

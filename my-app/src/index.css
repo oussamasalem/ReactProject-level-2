@@ -45,3 +45,104 @@ h1 {
   font-size: 25px;
 }
 
+/*========================
+sign in - sign up
+===========================*/
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+form input{
+  width: 250px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 4px 10px;
+  color: black;
+  border: 2px solid teal;
+  outline: none;
+}
+.dark form input{
+  color: white;
+  border: 2px solid teal;
+  background-color: #333;
+}
+.dark form input::placeholder{
+  color: teal;
+}
+form button{
+  display: block;
+  width: fit-content;
+  cursor: pointer;
+  font-weight: bold;
+  border: 2px solid teal;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 8px 13px;
+  color: teal;
+  border-radius: 5px;
+  background-color: transparent;
+}
+form button:active{
+  scale: .9;
+}
+form button:hover{
+  color: white;
+  background-color: teal;
+  transition: all .5s;
+}
+form p{
+  text-transform: capitalize;
+}
+form p:first-child{
+  font-size: 35px;
+  margin-bottom: 30px;
+  color: teal;
+}
+form .account{
+
+  color: black;
+  font-size: 16px;
+  line-height: 25px;
+}
+form .account a{
+  color: teal;
+  text-decoration: underline;
+}
+.dark form .account{
+  color: white;
+}
+
+
+.delete {
+  display:block;
+  padding: 12px;
+  color: white;
+  font-weight: bold;
+  background-color: #E91E63;
+  border: 1px solid #00BCD4;
+  border-radius: 5px;
+  margin: 20px auto;
+  cursor:pointer;
+}
+.delete:active{
+  scale:.9;
+  transition:.5s;
+}
+.dark .Profile .info p{
+  color :white;
+}
+.dark .Profile .info p{
+  color :black;
+}
+.home main .welcome span{
+  font-size: 50px;
+  color:teal;
+}
+.light .home main .welcome{
+  color :rgb(0, 0, 0);
+}
+.dark .home main .welcome {
+  color :rgb(255, 255, 255);
+}

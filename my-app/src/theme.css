@@ -16,5 +16,7 @@ Dark mode
 .dark .footer footer{
   background-color: #131212;
 }
-
+.light .welcom{
+  color: black;
+}
 
